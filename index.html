@@ -5,58 +5,83 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Входное задание от Digital design</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" href="/css/normalize.css" />
 		<link rel="stylesheet" href="/css/style.css" />
 	</head>
 	<body>
-			<header class="header">
-				<div class="container">
-          <nav>
-            <ul class="menu">
-              <li class="menu__item"><a href="#">Автомобили</a></li>
-              <li class="menu__item"><a href="#">Аксессуары</a></li>
-              <li class="menu__item"><a href="#">Прочее</a></li>
-            </ul>
-          </nav>
-        </div>
-			</header>
-      <main class="main">
-        <div class="container">
-          <h1 class="title">Каталог продукции</h1>
-          <div class="catalog">
-            <h2 class="catalog__title">Автомобили</h2>
-            <ul class="catalog__list">
-              <li class="item">
-                <div class="item__img">
-                  <img src="./img/kia-1.png" alt="car">
-                </div>
-                <div class="item__title">Kia deluxe edition</div>
-                <div class="item__date">01.01.2012</div>
-                <button class="item__button button">Купить</button>
-              </li>
-              <li class="item">
-                <div class="item__img">
-                  <img src="./img/kia-2.png" alt="car">
-                </div>
-                <div class="item__title">Kia standart edition</div>
-                <div class="item__date">01.04.2022</div>
-                <button class="item__button button">Купить</button>
-              </li>
-              <li class="item">
-                <div class="item__img">
-                  <img src="./img/kia-3.png" alt="car">
-                </div>
-                <div class="item__title">Kia bomj edition</div>
-                <div class="item__date">01.01.2002</div>
-                <button class="item__button button">Купить</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </main>
+		<header class="header">
+			<div class="container">
+				<nav>
+					<ul class="menu">
+						<li class="menu__item"><a href="#">Автомобили</a></li>
+						<li class="menu__item"><a href="#">Аксессуары</a></li>
+						<li class="menu__item"><a href="#">Прочее</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<main class="main">
+			<div class="container">
+				<h1 class="title">Каталог продукции</h1>
+				<div class="catalog">
+					<h2 class="catalog__title">Автомобили</h2>
+					<ul class="catalog__list">
+						<li class="item">
+							<div class="item__img">
+								<img src="./img/kia-1.png" alt="car" />
+							</div>
+							<div class="item__title">Kia deluxe edition</div>
+							<div class="item__date">01.01.2012</div>
+							<button class="item__button button">Купить</button>
+						</li>
+						<li class="item">
+							<div class="item__img">
+								<img src="./img/kia-2.png" alt="car" />
+							</div>
+							<div class="item__title">Kia standart edition</div>
+							<div class="item__date">01.04.2022</div>
+							<button class="item__button button">Купить</button>
+						</li>
+						<li class="item">
+							<div class="item__img">
+								<img src="./img/kia-3.png" alt="car" />
+							</div>
+							<div class="item__title">Kia bomj edition</div>
+							<div class="item__date">01.01.2002</div>
+							<button class="item__button button">Купить</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="purchaseForm" class="purchase-form-wrapper" style="display: none">
+				<form class="form" id="form">
+					<div class="form__row">
+						<label for="quantityInput">Количество:</label>
+						<input class="quantity-input" type="number" id="quantityInput" min="1" required />
+					</div>
+					<div class="form__row">
+						<label>Цвет:</label>
+						<input class="radio-input" type="radio" name="color" value="red" required checked />Красный
+            <input class="radio-input" type="radio" name="color" value="blue" /> Синий
+						<input class="radio-input" type="radio" name="color" value="green" /> Зеленый
+					</div>
+					<div class="form__row">
+						<label for="commentInput">Комментарий:</label>
+						<textarea class="comment-input" id="commentInput" maxlength="2000"></textarea>
+					</div>
+					<div class="form__row">
+						<button type="submit">Купить</button>
+						<button type="button" onclick="closePurchaseForm()">Закрыть</button>
+					</div>
+				</form>
+			</div>
+		</main>
 		<script src="/js/main.js"></script>
 	</body>
 </html>
