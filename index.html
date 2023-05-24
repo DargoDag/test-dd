@@ -1,15 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Входное задание от Digital design</title>
-  <link rel="stylesheet" href="/style.css" />
-</head>
-<body>
-  
-
-  <script src="/main.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Входное задание от Digital design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/normalize.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<body>
+			<header class="header">
+				<div class="container">
+          <nav>
+            <ul class="menu">
+              <li class="menu__item"><a href="#">Автомобили</a></li>
+              <li class="menu__item"><a href="#">Аксессуары</a></li>
+              <li class="menu__item"><a href="#">Прочее</a></li>
+            </ul>
+          </nav>
+        </div>
+			</header>
+      <main class="main">
+        <div class="container">
+          <h1 class="title">Каталог продукции</h1>
+          <div class="catalog">
+            <h2 class="catalog__title">Автомобили</h2>
+            <ul class="catalog__list">
+              <li class="item">
+                <div class="item__img">
+                  <img src="./img/kia-1.png" alt="car">
+                </div>
+                <div class="item__title">Kia deluxe edition</div>
+                <div class="item__date">01.01.2012</div>
+                <button class="item__button button">Купить</button>
+              </li>
+              <li class="item">
+                <div class="item__img">
+                  <img src="./img/kia-2.png" alt="car">
+                </div>
+                <div class="item__title">Kia standart edition</div>
+                <div class="item__date">01.04.2022</div>
+                <button class="item__button button">Купить</button>
+              </li>
+              <li class="item">
+                <div class="item__img">
+                  <img src="./img/kia-3.png" alt="car">
+                </div>
+                <div class="item__title">Kia bomj edition</div>
+                <div class="item__date">01.01.2002</div>
+                <button class="item__button button">Купить</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+		<script src="/js/main.js"></script>
+	</body>
 </html>
