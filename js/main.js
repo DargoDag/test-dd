@@ -8,16 +8,20 @@ let addDate = document.querySelectorAll(".item__date");
 let collToArray = Array.from(addDate);
 
 collToArray.map((item) => {
-	const dateText = new Date(item.innerHTML);
-	let weekNumber = getWeekNumber(dateText); // Вызов функции для получения номера недели
-	let output = `${weekNumber} неделя, ${getMonthName(
-		dateText
-	)} ${dateText.toLocaleString("ru", { year: "numeric" })} года`;
-	console.log(output);
-	return (item.innerHTML = output);
+  const dateText = new Date(item.innerHTML);
+  const weekNumber = getWeekNumber(dateText);
+  const dayOfWeek = getDayOfWeek(dateText);
+  const output = `${dayOfWeek}, ${weekNumber} неделя ${getMonthName(
+    dateText
+  )} ${dateText.toLocaleString("ru", { year: "numeric" })} года`;
+  return (item.innerHTML = output);
 });
 
-// Функция для определения склонения месяца
+function getDayOfWeek(date) {
+  const options = { weekday: "long" };
+  return date.toLocaleString("ru", options);
+}
+
 function getMonthName(date) {
 	const monthNames = [
 		"января",
@@ -37,7 +41,6 @@ function getMonthName(date) {
 	return monthNames[monthIndex];
 }
 
-// Функция для определения номера недели
 function getWeekNumber(date) {
 	const onejan = new Date(date.getFullYear(), 0, 1);
 	const weekNumber = Math.ceil(
@@ -46,48 +49,47 @@ function getWeekNumber(date) {
 	return weekNumber;
 }
 
-// Обработчик клика на кнопку "Купить"
 const buyButtons = document.querySelectorAll(".item__button");
 buyButtons.forEach((button) => {
   button.addEventListener("click", openPurchaseForm);
 });
 
-// Открыть форму покупки
 function openPurchaseForm(event) {
   const item = event.currentTarget.closest(".item");
   const itemTitle = item.querySelector(".item__title").textContent;
   const purchaseForm = document.getElementById("purchaseForm");
-  purchaseForm.style.display = "flex";
+  purchaseForm.classList.add("fadeIn");
 
-  // Очистить предыдущий selectedCardInfo, если есть
+  const body = document.getElementById("body");
+  body.classList.add('js-no-scroll');
+
   clearSelectedCardInfo();
 
-  // Заполнить информацию о выбранном товаре
   const selectedCardInfo = document.createElement("h3");
   selectedCardInfo.textContent = `Выбрано: ${itemTitle}`;
   const form = document.querySelector("#form");
   form.insertBefore(selectedCardInfo, form.firstChild);
 
-  // Сохранить ссылку на selectedCardInfo в объекте purchaseForm
   purchaseForm.selectedCardInfo = selectedCardInfo;
 
-  // Добавить обработчик клика на purchaseForm
   purchaseForm.addEventListener("click", handlePurchaseFormClick);
+
+  form.addEventListener("submit", handleFormSubmit);
+
+  resetForm(form);
 }
 
-// Закрыть форму покупки
 function closePurchaseForm() {
   const purchaseForm = document.getElementById("purchaseForm");
-  purchaseForm.style.display = "none";
+  purchaseForm.classList.remove("fadeIn");
+  const body = document.getElementById("body");
+  body.classList.remove('js-no-scroll');
 
-  // Очистить selectedCardInfo при закрытии
   clearSelectedCardInfo();
 
-  // Удалить обработчик клика на purchaseForm
   purchaseForm.removeEventListener("click", handlePurchaseFormClick);
 }
 
-// Очистить предыдущий selectedCardInfo, если есть
 function clearSelectedCardInfo() {
   const purchaseForm = document.getElementById("purchaseForm");
   if (purchaseForm.selectedCardInfo) {
@@ -96,18 +98,96 @@ function clearSelectedCardInfo() {
   }
 }
 
-// Обработчик клика на purchaseForm
 function handlePurchaseFormClick(event) {
   const targetElement = event.target;
   const formElement = document.getElementById("form");
 
-  // Проверить, является ли клик внутри formElement
   if (formElement.contains(targetElement)) {
-    // Клик внутри формы - не закрывать purchaseForm
     event.stopPropagation();
   } else {
-    // Клик вне формы - закрыть purchaseForm
     closePurchaseForm();
   }
 }
 
+function handleFormSubmit(event) {
+  event.preventDefault();
+  alert("Спасибо за покупку!");
+  closePurchaseForm();
+}
+
+function resetForm(form) {
+  form.reset();
+}
+
+function checkScrollPosition() {
+  const scrollToTopButton = document.getElementById("scrollToTopButton");
+  if (window.scrollY > 0) {
+    scrollToTopButton.classList.add("show");
+  } else {
+    scrollToTopButton.classList.remove("show");
+  }
+}
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+window.addEventListener("scroll", checkScrollPosition);
+
+function toggleJumpingAnimation() {
+  const scrollToTopButton = document.getElementById("scrollToTopButton");
+  const themeSwitch = document.getElementById("switch");
+  scrollToTopButton.classList.toggle("jumping");
+  themeSwitch.classList.toggle("jumping");
+}
+
+setInterval(toggleJumpingAnimation, 3000);
+
+
+const smoothScrollLinks = document.querySelectorAll('.smooth-scroll-link');
+
+smoothScrollLinks.forEach(link => {
+  link.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    const targetId = this.getAttribute('href').substring(1);
+
+    scrollToAnchor(targetId);
+    menu.classList.remove("open");
+    burgerBtn.classList.remove("open");
+  });
+});
+
+function scrollToAnchor(targetId) {
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+const themeToggle = document.getElementById('themeToggle');
+
+themeToggle.addEventListener('change', function() {
+  if (this.checked) {
+    document.documentElement.style.setProperty('--main-text-color', '#fff');
+    document.documentElement.style.setProperty('--main-bg-color', '#333');
+    document.documentElement.style.setProperty('--secondary-bg-color', '#715f5f');
+  } else {
+    document.documentElement.style.setProperty('--main-text-color', '#333');
+    document.documentElement.style.setProperty('--main-bg-color', '#fbf8ec');
+    document.documentElement.style.setProperty('--secondary-bg-color', '#fff');
+  }
+});
+
+const burgerBtn = document.getElementById("burgerBtn");
+const menu = document.querySelector(".nav");
+
+burgerBtn.addEventListener("click", function() {
+  const body = document.getElementById("body");
+  body.classList.toggle('js-no-scroll');
+	menu.classList.toggle("open");
+	burgerBtn.classList.toggle("open");
+});
